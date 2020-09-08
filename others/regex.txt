@@ -1,0 +1,64 @@
+\d matches any digit [0 - 9]
+\D matches any character that is not a digit.
+\s matches any whitespace character [ \r\n\t\f ]
+\S matches any non-white space character
+\w will match any word character (Word characters include alphanumeric characters (A-Z, a-z and 0-9) and underscores (_))
+\W matches any non-word character (any thing other then above)
+
+
+The ^ symbol matches the position at the start of a string
+The $ symbol matches the position at the end of a string
+
+[ ] matches only one out of several characters placed inside the square brackets
+The negated character class [^] matches any character that is not in the square brackets
+[a-z] is the same as [abc...xyz]
+[^a-z] is any thing not in between a to z
+
+
+The tool {x} will match exactly  repetitions of character/character class/groups --- \w{4} that mean 4 words
+The {x,y} tool will match between  and  (both inclusive) repetitions of character/character class/grou
+^\d{1,2}[a-zA-Z]{3,}\.{0,3}$
+
+The * tool will match zero or more repetitions of character/character class/group
+    w*     : It will match the character w  or more times. 
+    [xyz]* : It will match the characters x, y or z  or more times. 
+    \d*    : It will match any digit  or more times.
+The + tool will match one or more repetitions of character/character class/group
+    w+     : It will match the character w  or more times. 
+    [xyz]+ : It will match the character x, y or z  or more times.
+    \d+    : It will match any digit  or more times.
+            ^\d+[A-Z]+[a-z]+$
+
+\b assert position at a word boundary. .. TODO not much clear
+
+( ) around a regular expression can group that part of regex together. This allows us to apply different quantifiers to that group.
+(?: ) can be used to create a non-capturing group. It is useful if we do not need the group to capture its match.
+    (ok){3,} ..... should have  or more consecutive repetitions of ok.
+
+'|' mean or condition ----(Bob|Kevin|Stuart)
+
+This tool (\1 references the first capturing group) matches the same text as previously matched by the capturing group.
+    (\d)\1: It can match 00, 11, 22, 33, 44, 55, 66, 77, 88 or 99.
+    ^([a-z]\w\s\W\d\D[A-Z][a-zA-Z][aeiouAEIOU]\S)\1$
+
+The positive lookahead (?=) asserts regex_1 to be immediately followed by regex_2. The lookahead is excluded from the match. It does not return matches of regex_2. The lookahead only asserts whether a match is possible or not.
+    regex1(?=regex2)
+    o(?=oo) ------Write a regex that can match all occurrences of o followed immediately by oo in string
+
+The negative lookahead (?!) asserts regex_1 not to be immediately followed by regex_2. Lookahead is excluded from the match (do not consume matches of regex_2), but only assert whether a match is possible or not.
+    regex1(?!regex2)
+    (.)(?!\1) -------Write a regex which can match all characters which are not immediately followed by that same character
+
+The positive lookbehind (?<=) asserts regex_1 to be immediately preceded by regex_2. Lookbehind is excluded from the match (do not consume matches of regex_2), but only assert whether a match is possible or not.
+    (?<=regex2)regex1
+    (?<=[13579])[0-9] ------Write a regex which can match all the occurences of digit which are immediately preceded by odd digit.
+
+The negative lookbehind (?<!) asserts regex_1 not to be immediately preceded by regex_2. Lookbehind is excluded from the match (do not consume matches of regex_2), but only assert whether a match is possible or not.
+    (?<!regex2)regex1
+    "(?<![aeiouAEIOU])." ---- Write a regex which can match all the occurences of characters which are not immediately preceded by vowels (a, e, i, u, o, A, E, I, O, U).
+
+
+This is Matrix#  %!
+This is Matrix#  %!
+#Oye is Mattrix sccript Triinity  $ #%
+#Oye is Mattrix sccript Triinity   #%
