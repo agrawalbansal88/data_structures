@@ -1,0 +1,12 @@
+pod is the minimum unit to run on K8
+
+we can limit ram, cpu per pod(mean group of containers)
+
+pod is a  control group. all IP are assigned for POD not containters
+
+
+to access api-server from pod:
+curl -v --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/
+
+/var/run/secrets/kubernetes.io/serviceaccount/ca.crt == certificate
+/var/run/secrets/kubernetes.io/serviceaccount/token == Access token

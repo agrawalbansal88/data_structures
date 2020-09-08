@@ -1,0 +1,84 @@
+create  Dockerfile
+docker build -t <image tag> <Dockerfile_PATH>
+docker build -t image1:1.0 /root/Dockerfile
+docker run <image name>
+docker exec -it <container_id> /bin/sh
+
+**********
+FROM ubuntu   # to get ubuntu
+#FROM scrach arg1 arg2  #to create image from scrach incase you dont want any base image
+MAINTAINER ankuragr <agrawalbansal88@gmail.com>
+RUN apt-get update
+CMD ["echo", "Hello world"]
+
+**********
+FROM alpine
+COPY scrit.sh /usr/src/script.sh   # copy scrit.sh to image
+CMD ["/usr/src/script.sh"] # execute script on starting
+
+**********
+FROM alpine
+ENTRYPOINT ["echo"] 
+
+docker run <dockerid> arg
+# on runtime it will behave as 'echo arg'==== 'echo Hello World'
+
+*********
+FROM alpine
+ENV var1=ankur var2=agrawal var3=oki   # this will set enviornment vaiables
+
+*********
+FROM alpine
+WORKDIR /var
+CMD ["ls"]
+
+*********
+FROM alpine
+ADD a.tar.gz /root/   # this will untar and copy, even you can use URL as well
+COPY a.tar.gz /tmp/   # thsi will be plain copy
+WORKDIR /usr/src
+ARG name="Ankur"
+ENV username=$(name)
+
+*********
+FROM ubuntu
+RUN mkdir /sourcecode
+RUN addgroup -S appuser && adduser -S appuser -G appuser
+USER appuser # this will login as appuser
+RUN apt-get install nodejs
+WORKDIR /sourcecode 
+ADD requirement.txt /sourcecode
+RUN pip install -r requirement.txt # this will install all python deps listed in requirement.txt
+
+*********
+---------
+/usr/src/script.sh
+this script will run top command if exact 1 argument is passed to script
+---------
+FROM alpine
+COPY script.sh /usr/src/script.sh
+    -----------
+    CMD ["/usr/src/script.sh"]             # docker run <docker_id> "/usr/src/script.sh" "Test"
+    -----------
+    ENTRYPOINT ["/usr/src/script.sh"]      # docker run <docker_id> "Test"
+    ----------
+    ENTRYPOINT ["/usr/src/script.sh"]      # docker run <docker_id>
+    CMD ["Test"]
+    ----------
+
+*********
+ENTRYPOINT vs CMD
+ADD vs COPY
+RUN vs CMD
+RUN is executed during creation of container
+CMD is executed after creation of container
+Alpine is the smallest base image
+********
+.dockerignore  # it will ignore list of files while copying
+----
+.*         # all hidden files like .git, .gitignore
+*.pyc
+README
+*.md
+!README.md     #if we want specific file to be copied as *.md will ignore this file
+----

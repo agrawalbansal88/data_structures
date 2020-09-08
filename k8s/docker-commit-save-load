@@ -1,0 +1,47 @@
+docker commit <old_container_name> <new_container_name>
+docker save -o new_image.tgz old_image
+docker load -i new_image.tgz 
+
+------
+- data mounted to old container will not be mounted on new container
+- 
+
+-------
+ANKURAGR-M-C0FT:section_vise ankuragr$ docker commit --help
+
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+Create a new image from a container's changes
+
+Options:
+  -a, --author string    Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  -c, --change list      Apply Dockerfile instruction to the created image
+  -m, --message string   Commit message
+  -p, --pause            Pause container during commit (default true)
+ANKURAGR-M-C0FT:section_vise ankuragr$
+-----------
+
+
+ANKURAGR-M-C0FT:section_vise ankuragr$ docker save --help
+
+Usage:  docker save [OPTIONS] IMAGE [IMAGE...]
+
+Save one or more images to a tar archive (streamed to STDOUT by default)
+
+Options:
+  -o, --output string   Write to a file, instead of STDOUT
+ANKURAGR-M-C0FT:section_vise ankuragr
+---------
+
+
+ANKURAGR-M-C0FT:section_vise ankuragr$ docker load --help
+
+Usage:  docker load [OPTIONS]
+
+Load an image from a tar archive or STDIN
+
+Options:
+  -i, --input string   Read from tar archive file, instead of STDIN
+  -q, --quiet          Suppress the load output
+ANKURAGR-M-C0FT:section_vise ankuragr$
+--------

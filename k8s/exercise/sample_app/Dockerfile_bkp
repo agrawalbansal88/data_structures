@@ -1,0 +1,11 @@
+FROM alpine:3.7
+FROM golang:1.10 as go
+
+RUN mkdir -p /opt/workspace/app
+COPY app /opt/workspace/app
+ENV GOPATH /opt/workspace/app
+WORKDIR /opt/workspace/app
+RUN go build sample.go
+
+RUN chmod 777 sample
+ENTRYPOINT ./sample 

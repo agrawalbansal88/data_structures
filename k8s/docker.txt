@@ -1,0 +1,38 @@
+docker version
+docker info
+docker ps -a
+
+
+docker run hello-world
+docker images
+docker pull <image-name>:<version>
+docker pull hello-world
+docker pull ubuntu
+docker pull ubuntu:14.04
+docker rmi ubuntu:14.04   # to remove images
+
+
+docker start <container>
+docker stop <container>  # on stop, data/context will still be there
+docker rm <container>
+
+
+docker run -d --name web -p 80:8080 nigelpoultan/pluralsight-docker-ci
+# -d --> detached mode
+# --name -->container-name which we are creating
+# -p --> port mapping 8080 is mapped to 80 so from outside you use 80
+# nigelpoultan/pluralsight-docker-ci --> image name
+
+
+docker run -it --name container1 ubuntu:latest /bin/bash
+
+# -it --> to run in interactive mode 
+# /bin/bash --> to run bash on start
+### NOTE: dont run 'exit' command else container will exit... we have to use CTRL+P+Q
+
+
+************
+* default registry is https://hub.docker.com
+
+
+

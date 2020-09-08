@@ -1,0 +1,36 @@
+swarm mode
+- manager nodes
+- worker nodes
+- service
+- Task
+
+docker node ls
+docker swarm init --advertise-addr 172.31.32.161:2377 --listen-addr 172.31.32.161:2377 #run on 1st manager node OUT1
+docker swarm join-token manager  #run on 1st manager node OUT2
+docker swarm join-token worker #run on 1st manager node OUT3
+
+OUT2 -->run at manage 2 and 3 with --advertise-addr 172.31.32.161:2377 --listen-addr 172.31.32.161:2377 with their IPs
+OUT3 -->run at worker 1, 2 and 3 with --advertise-addr 172.31.32.161:2377 --listen-addr 172.31.32.161:2377 with their IPs
+
+docker node promote ID
+
+---------service-----
+docker service create --name service1 -p 8080:8080 --replicas 5 image1
+docker service ls
+docker service ps service1
+docker service inspect service1
+shutdown -h now # to shutdown the node
+docker service scale service=7   # to uplift to 7 replicas
+or
+docker service update --replicas 10 service1
+
+docker service rm service1
+---------rolling update
+docker network create -d overlay network1
+docker network ls
+
+docker service create --name service2 --network network1 -p 80:80 --replicas 12 image2
+docker service update --image image2:v2 --update-parallelism 2 --update-delay 10s  #this means update from image2 -> image2:2 by picking 2 containers at a time and give 10 secs dealy between to update
+
+
+docker stack commands are used for deplyments

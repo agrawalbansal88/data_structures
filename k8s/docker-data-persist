@@ -1,0 +1,45 @@
+******
+3 possible options.
+a. volume
+b. bind mount
+c. TODO (only for Linux) 
+****** VOLUME
+docker volume create vol-test
+docker volume ls
+
+ducker run -it -v vol-test:/data/ <container-id> /bin/sh
+ducker run -it --mount source=vol-test, destination=/data <container-id> /bin/sh
+
+************
+ANKURAGR-M-C0FT:/Users/ankuragr/Desktop/MITG/code/smf-service  (master)$ docker volume --help
+
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  ls          List volumes
+  prune       Remove all unused local volumes
+  rm          Remove one or more volumes
+
+Run 'docker volume COMMAND --help' for more information on a command.
+
+************BIND MOUNT
+ducker run -it -v /root/abc/:/data/ <container-id> /bin/sh
+ducker run -it --mount type=bind source=/root/abc/,target=/data/ <container-id> /bin/sh
+
+target and destination both are same
+
+************
+1. docker run -d --name docker1 -v  ~/Desktop/dockers/test1:/tmp/ankur ubuntu
+2. docker run --rm --volumes-from docker1 -v ~/Desktop/dockers/test2/:/backup ubuntu tar cvf /backup/backup.tar /tmp/ankur
+3. docker run -it --name docker2 -v /data ubuntu /bin/bash
+4. docker run --rm --volumes-from docker2 -v ~/Desktop/dockers/test2/:/backup ubuntu bash -c "cd /data && tar xvf /backup/backup.tar"
+
+Step1 &2 --> create and take backup of volume
+Step3 &4 --> create a new container and restore old data here
+***********
+
+

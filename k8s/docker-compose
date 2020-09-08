@@ -1,0 +1,29 @@
+-------------------------
+<docker-compose.yaml>
+version: "3.7"
+
+services: 
+    web:
+        image: nginx
+        depends_on :
+            - database   # this mean nginx will come only after database
+        ports:
+            - "9876:80"  # we will expose 9876 instead of 80
+    database:
+        image: postgres
+-------------------------
+
+
+
+
+********
+- this is to create a multi container application
+
+
+********
+docker-compose config                   # this will read and compile docker-compose.yaml file but not building
+docker-compose up                       # bring up all containers present in docker-compose.yaml 
+docker-compose down                     # bring down all containers
+docker-compose up -d                    # bring up in deteached mode
+docker-compose up -d --scale web=4      # thsi will bring up 4 instances of web and 1 of database
+
