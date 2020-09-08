@@ -1,0 +1,19 @@
+? --> 0 or 1 char
+* --> any number of char
++ --> 1 or more
+
+
+? is applied after the text
+{6}  meaning we are match exact 6 chars
+() to group the stuff
+i to ignore the case
+^ to use in start -- to get exact match
+$ to use in end --- to get exact match
+\s* to match all type of white space --to cover(\t\f\n\r)
+
+[a-f] --> match any a to f
+[^a-f] --> match any excet a to f
+[] --> inside this if you want to match any special one.. keep them in start or end
+. --> match anything except new line
+
+
