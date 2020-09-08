@@ -1,0 +1,2 @@
+To read a line which contains spaces--> scanf("%[^\n]", s); 
+
