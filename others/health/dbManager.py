@@ -98,3 +98,17 @@ class BuildCommitInfo(me.Document):
 
 def init_connection():
     me.connect(db=DATABASE, host=MONGO_IP, port=27017)
+
+    
+def initDB():
+    init_connection()
+    for key, (suits, branches) in DASHBOARDS.items():
+        dashboard = DashboardInfo()
+        dashboard.name = key
+        dashboard.jenkins_server = "http://eig-jenkins.cisco.com:8000"
+        dashboard.build_server = "https://engci-maven-master.cisco.com/artifactory/smi-fuse-internal-snapshot/mobile-cnat-smf/smf-products"
+        dashboard.suits = suits
+        dashboard.branches = branches
+        dashboard.save()
+
+    tests = TestInfo.objects(dashboard=dashboard, suite_name=tag, branch=branch, test_url=test_url).order_by('executed_on')
